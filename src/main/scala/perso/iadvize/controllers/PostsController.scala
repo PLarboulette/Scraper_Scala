@@ -7,6 +7,7 @@ package controllers
 import javax.inject.Inject
 import com.twitter.finagle.httpx.Request
 import com.twitter.finatra._
+import perso.iadvize.domain.Post
 import perso.iadvize.services.PostsService
 
 
@@ -22,7 +23,10 @@ class PostsController  @Inject () (postsService: PostsService) extends Controlle
     val from : Option[String] = request.params.get("from")
     val to : Option[String] = request.params.get("to")
 
-    postsService.getPosts(author, from, to).map(post => post)
+    val posts : scala.collection.mutable.Set[Post] = postsService.getPosts(author, from, to)
+    val result = Map("posts" -> posts, "count" -> posts.size)
+    result
+//    postsService.getPosts(author, from, to).map(post => post)
   }
 
   get("/posts/:id") {request : Request =>
@@ -30,8 +34,8 @@ class PostsController  @Inject () (postsService: PostsService) extends Controlle
     postsService.getPostById(id)
   }
 
-  get("/scraping") {
-    postsService.scraping
+  get("/scraping") { request : Request =>
+    postsService.scraping()
     "Scraping"
   }
 

@@ -1,6 +1,8 @@
 package perso.iadvize.utils
 
-import org.joda.time.DateTime
+import java.util.Locale
+
+import org.joda.time.{DateTimeZone, DateTime}
 
 /**
   * Created by pierre on 13/03/16.
@@ -19,8 +21,13 @@ object Utils {
     val year = originalDate.split(" ")(0).split("/")(2).toInt
     val hour = originalDate.split("  ")(1).split(":")(0).toInt
     val minutes = originalDate.split("  ")(1).split(":")(1).trim.toInt
-    val dt : DateTime = new DateTime(year, month, day, hour, minutes, 0, 0)
+    val dt : DateTime = new DateTime(year, month, day, hour, minutes, 0, DateTimeZone.UTC)
     dt
   }
+
+  def getMinimalDate (originalDate : String) : String = {
+    originalDate.split(" ")(0).trim
+  }
+
 
 }

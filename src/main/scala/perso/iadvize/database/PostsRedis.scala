@@ -12,6 +12,8 @@ import scala.collection.mutable
 object PostsRedis {
 
   val r = new RedisClient("localhost", 6379)
+  r.flushdb
+
 
   def savePost (post : Post) : Unit = {
     r.rpush("Post : " +post.id, post.content)
@@ -26,7 +28,7 @@ object PostsRedis {
       val postAttributes = r.lrange(element.get, 0, 200).get
       val id = element.get.split(":")(1).trim
       val post : Post = Post(id,postAttributes.head.get.toString, postAttributes(1).get.toString, postAttributes(2).get.toString)
-      result += post
+      if (result.size < 200) result += post
     }
     result
   }
