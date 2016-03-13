@@ -5,45 +5,36 @@ package controllers
   */
 
 import java.io.StringWriter
+import javax.inject.Inject
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.twitter.finagle.httpx.Request
 import com.twitter.finatra._
 import perso.iadvize.domain.Post
+import perso.iadvize.services.PostsService
 
 
-class PostsController extends Controller {
+class PostsController  @Inject () (postsService: PostsService) extends Controller {
 
   val mapper = new ObjectMapper()
   mapper.registerModule(DefaultScalaModule)
 
   /**
-    *  Return all the postss if no  parameter is specified
+    *  Return all the posts if no  parameter is specified
     *  Otherwise, the response is filtered by the different parameters send into request
     */
   get("/posts") { request: Request =>
+    val author : Option[String]= request.params.get("author")
+    val from : Option[String] = request.params.get("from")
+    val to : Option[String] = request.params.get("to")
 
-    val post = Post("1","13", "Coucou", "OK")
-
-    val out = new StringWriter
-    mapper.writeValue(out, post)
-    val json = out.toString
-
-    /*val person2 = mapper.readValue(json, classOf[Person])
-    println(person2)*/
-
-    // Get the parameters if they exists
-    val author : String = request.params.getOrElse("author", None) toString
-    val from : String = request.params.getOrElse("from", None) toString
-    val to : String = request.params.getOrElse("to", None) toString
-
-
-   /* */
-
-    json
-
+    postsService.getPosts(author, from, to).map(post => post)
   }
+
+  get("/posts/:id") {request : Request =>
+  }
+
 
 
 }

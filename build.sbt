@@ -36,5 +36,13 @@ libraryDependencies ++= Seq(
 
   "org.mockito" % "mockito-core" % "1.9.5" % "test",
   "org.scalatest" %% "scalatest" % "2.2.3" % "test",
-  "org.specs2" %% "specs2" % "2.3.12" % "test"
+  "org.specs2" %% "specs2" % "2.3.12" % "test",
+
+  "net.ruippeixotog" %% "scala-scraper" % "0.1.2",
+  "org.mongodb.scala" %% "mongo-scala-driver" % "1.0.1"
+
 )
+
+
+
+
