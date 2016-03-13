@@ -7,6 +7,7 @@ import net.ruippeixotog.scalascraper.dsl.DSL._
 import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
 import net.ruippeixotog.scalascraper.dsl.DSL.Parse._
 import org.jsoup.nodes.Element
+import perso.iadvize.database.PostsMongo
 import perso.iadvize.domain.Post
 
 import scala.collection.mutable
@@ -66,6 +67,7 @@ object Scrapper {
 
         val post : Post = Post(postID, contentPost, datePost, authorPost)
 
+          PostsMongo.savePost(post)
       }
 
   }
