@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import perso.iadvize.database.PostsRedis
 import perso.iadvize.domain.Post
+import perso.iadvize.scraper.Scrapper
 
 import scala.collection.mutable
 /**
@@ -19,6 +20,10 @@ class PostsService {
   def getPostById ( postId : String) : Option[Post] = {
     val posts : mutable.Set[Post] = getPosts(None, None, None).filter(post => post.id == postId)
     posts.headOption
+  }
+
+  def scraping() : Unit = {
+    Scrapper.init()
   }
 
 

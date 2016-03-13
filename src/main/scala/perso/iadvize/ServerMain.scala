@@ -20,15 +20,7 @@ class Server extends HttpServer {
 
   override val defaultFinatraHttpPort: String = ":8080"
 
-  /*override val modules = Seq(
-    JacksonModule
-  )*/
-
-  iniScrapper()
-
-  def iniScrapper() : Unit = {
-    Scrapper.init()
-  }
+  Scrapper.init()
 
   override def configureHttp(router: HttpRouter): Unit = {
     router.add[PostsController]

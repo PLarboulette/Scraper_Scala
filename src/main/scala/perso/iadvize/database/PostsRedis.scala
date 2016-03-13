@@ -19,7 +19,7 @@ object PostsRedis {
     r.rpush("Post : " +post.id, post.author)
   }
 
-  def getPosts : scala.collection.mutable.Set[Post] = {
+  def getPosts() : scala.collection.mutable.Set[Post] = {
     val result = mutable.Set[Post]()
     val set = r.keys("Post : *").get
     set.foreach { element =>
