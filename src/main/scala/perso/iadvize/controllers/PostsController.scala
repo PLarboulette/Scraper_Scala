@@ -11,7 +11,6 @@ import com.twitter.finatra._
 import perso.iadvize.domain.Post
 import perso.iadvize.services.PostsService
 
-
 class PostsController  @Inject () (postsService: PostsService) extends Controller {
 
 
@@ -31,17 +30,14 @@ class PostsController  @Inject () (postsService: PostsService) extends Controlle
   get("/posts/:id") {request : Request =>
     val id : String = request.params.getOrElse("id","Fail")
     val post : Option[Post] =  postsService.getPostById(id)
-    if (post nonEmpty) Map("posts" -> postsService.getPostById(id).toSeq.sorted) else Map("Error" -> response.status(401).plain("ID not recognized"))
+
+    if (post.nonEmpty) Map("posts" -> postsService.getPostById(id).toSeq.sorted)
+    else Map("Error" -> "ID not recognized")
 
   }
 
   get("/scraping") { request : Request =>
     postsService.scraping()
-    "Scraping"
+    Map("Scraping" -> "Scrap is fun")
   }
-
-
-
-
-
 }

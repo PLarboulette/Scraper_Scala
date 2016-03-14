@@ -11,7 +11,6 @@ import com.twitter.finatra.http.response.ResponseBuilder
   * Created by pierre on 14/03/16.
   */
 
-
 class MalformedURLExceptionMapper @Inject()(response: ResponseBuilder)
   extends ExceptionMapper[MalformedURLException] {
 

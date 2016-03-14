@@ -1,8 +1,7 @@
 package perso.iadvize.database
 
-import org.joda.time.DateTime
-import perso.iadvize.domain.Post
 import com.redis._
+import perso.iadvize.domain.Post
 
 import scala.collection.mutable
 
@@ -12,7 +11,6 @@ import scala.collection.mutable
 object PostsRedis {
 
   val r = new RedisClient("localhost", 6379)
-
 
   def clearDatabase () : Unit = {
     r.flushdb
@@ -35,7 +33,4 @@ object PostsRedis {
     }
     result
   }
-
-
-
 }

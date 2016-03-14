@@ -1,15 +1,16 @@
 package perso.iadvize.scraper
 
-import java.util.{Locale, UUID}
+import java.util.UUID
 
 import net.ruippeixotog.scalascraper.browser.Browser
-import net.ruippeixotog.scalascraper.dsl.DSL._
 import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
+import net.ruippeixotog.scalascraper.dsl.DSL._
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 import perso.iadvize.database.PostsRedis
 import perso.iadvize.domain.Post
 import perso.iadvize.utils.Utils
+
 import scala.collection.mutable
 
 
@@ -107,7 +108,4 @@ object Scrapper {
     if (authorPost.trim.nonEmpty) result += authorPost
     result
   }
-
-
-
 }

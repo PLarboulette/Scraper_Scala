@@ -46,8 +46,4 @@ object Utils {
     datetimeTo.withSecondOfMinute(59)
     datetimeTo
   }
-
-
-
-
 }
