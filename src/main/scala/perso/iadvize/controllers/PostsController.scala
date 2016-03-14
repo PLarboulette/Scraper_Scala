@@ -5,7 +5,7 @@ package controllers
   */
 
 import javax.inject.Inject
-import com.twitter.finagle.http.BadHttpRequest
+
 import com.twitter.finagle.httpx.Request
 import com.twitter.finatra._
 import perso.iadvize.domain.Post
@@ -31,7 +31,7 @@ class PostsController  @Inject () (postsService: PostsService) extends Controlle
   get("/posts/:id") {request : Request =>
     val id : String = request.params.getOrElse("id","Fail")
     val post : Option[Post] =  postsService.getPostById(id)
-    if (post nonEmpty) Map("posts" -> postsService.getPostById(id)) else response.status(401).plain("ID not recognized")
+    if (post nonEmpty) Map("posts" -> postsService.getPostById(id)) else Map("Error" -> response.status(401).plain("ID not recognized"))
 
   }
 
