@@ -12,8 +12,11 @@ import scala.collection.mutable
 object PostsRedis {
 
   val r = new RedisClient("localhost", 6379)
-  r.flushdb
 
+
+  def clearDatabase () : Unit = {
+    r.flushdb
+  }
 
   def savePost (post : Post) : Unit = {
     r.rpush("Post : " +post.id, post.content)

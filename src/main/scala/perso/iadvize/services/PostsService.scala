@@ -30,6 +30,7 @@ class PostsService {
   }
 
   def scraping() : Unit = {
+    PostsRedis.clearDatabase()
     Scrapper.init()
   }
 
