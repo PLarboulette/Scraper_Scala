@@ -29,5 +29,9 @@ object Utils {
     originalDate.split(" ")(0).trim
   }
 
+  def dateStringFormat (originalDate : String) : String = {
+    Utils.convertDate(originalDate).toString("YYYY-MM-dd HH:mm:ss")
+  }
+
 
 }

@@ -24,9 +24,7 @@ class PostsController  @Inject () (postsService: PostsService) extends Controlle
     val to : Option[String] = request.params.get("to")
 
     val posts : scala.collection.mutable.Set[Post] = postsService.getPosts(author, from, to)
-    val result = Map("posts" -> posts, "count" -> posts.size)
-    result
-//    postsService.getPosts(author, from, to).map(post => post)
+    Map("posts" -> posts, "count" -> posts.size)
   }
 
   get("/posts/:id") {request : Request =>
