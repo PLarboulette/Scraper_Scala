@@ -1,8 +1,6 @@
 package perso.iadvize.utils
 
-import java.util.Locale
-
-import org.joda.time.{DateTimeZone, DateTime}
+import org.joda.time.{DateTime, DateTimeZone}
 
 /**
   * Created by pierre on 13/03/16.
@@ -32,6 +30,24 @@ object Utils {
   def dateStringFormat (originalDate : String) : String = {
     Utils.convertDate(originalDate).toString("YYYY-MM-dd HH:mm:ss")
   }
+
+  def initDatetimeFrom(from: String): DateTime = {
+    val datetimeFrom: DateTime = new DateTime(from)
+    datetimeFrom.withHourOfDay(0)
+    datetimeFrom.withMinuteOfHour(0)
+    datetimeFrom.withSecondOfMinute(0)
+    datetimeFrom
+  }
+
+  def initDatetimeTo(to: String): DateTime = {
+    val datetimeTo: DateTime = new DateTime(to)
+    datetimeTo.withHourOfDay(23)
+    datetimeTo.withMinuteOfHour(59)
+    datetimeTo.withSecondOfMinute(59)
+    datetimeTo
+  }
+
+
 
 
 }
