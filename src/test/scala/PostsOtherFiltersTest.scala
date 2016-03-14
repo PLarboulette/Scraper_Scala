@@ -138,6 +138,4 @@ class PostsOtherFiltersTest extends FeatureTest {
       new PostsService().getPosts(None, Some("2014-06-08"), Some("2014-06-11")).size should be(1) // Only one between the two dates
     }
   }
-
-
 }

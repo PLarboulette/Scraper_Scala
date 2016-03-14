@@ -34,5 +34,4 @@ class PostsFilterByIDTest extends FeatureTest {
       )
     }
   }
-
 }
