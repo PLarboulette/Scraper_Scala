@@ -17,7 +17,7 @@ class PostsService {
     var result: mutable.Set[Post] = PostsRedis.getPosts()
     if (from.nonEmpty && to.nonEmpty) result = getPostsBetweenDates(from.get, to.get)
     else if (from.nonEmpty) result = getPostsAfterDate(from.get)
-    else if (to.nonEmpty) result = getPostsAfterDate(to.get)
+    else if (to.nonEmpty) result = getPostsBeforeDate(to.get)
     if (author.nonEmpty) result.filter(post => post.author == author.get) else result
   }
 

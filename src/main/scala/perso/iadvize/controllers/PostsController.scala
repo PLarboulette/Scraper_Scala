@@ -34,9 +34,9 @@ class PostsController  @Inject () (postsService: PostsService) extends Controlle
     val goodFormatTo: Boolean = if (to.nonEmpty) get(to.get) else false
 
     if (from.nonEmpty && !goodFormatFrom)
-      Map("Date" -> "Incorrect format for From input")
+      Map("Date" -> "Incorrect format for From input. Enter a date with the following format : YYYY-MM-DD")
     else if (to.nonEmpty && !goodFormatTo)
-      Map("Date" -> "Incorrect format for To input")
+      Map("Date" -> "Incorrect format for To input. Enter a date with the following format : YYYY-MM-DD")
     else {
       val posts: Seq[Post] = postsService.getPosts(author, from, to).toSeq.sorted
       Map("posts" -> posts, "count" -> posts.size)
