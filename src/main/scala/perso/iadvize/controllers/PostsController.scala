@@ -23,8 +23,25 @@ class PostsController  @Inject () (postsService: PostsService) extends Controlle
     val from : Option[String] = request.params.get("from")
     val to : Option[String] = request.params.get("to")
 
-    val posts: Seq[Post] = postsService.getPosts(author, from, to).toSeq.sorted
-    Map("posts" -> posts, "count" -> posts.size)
+    val dateRegex = "([0-9]{4}-[0-9]{2}-[0-9]{2})"
+    val DateOnly = dateRegex.r
+    def get(s: String): Boolean = s match {
+      case DateOnly(d) => true
+      case _ => false
+    }
+
+    val goodFormatFrom: Boolean = if (from.nonEmpty) get(from.get) else false
+    val goodFormatTo: Boolean = if (to.nonEmpty) get(to.get) else false
+
+    if (from.nonEmpty && !goodFormatFrom)
+      Map("Date" -> "Incorrect format for From input")
+    else if (to.nonEmpty && !goodFormatTo)
+      Map("Date" -> "Incorrect format for To input")
+    else {
+      val posts: Seq[Post] = postsService.getPosts(author, from, to).toSeq.sorted
+      Map("posts" -> posts, "count" -> posts.size)
+    }
+
   }
 
   get("/posts/:id") {request : Request =>
