@@ -24,14 +24,14 @@ class PostsController  @Inject () (postsService: PostsService) extends Controlle
     val from : Option[String] = request.params.get("from")
     val to : Option[String] = request.params.get("to")
 
-    val posts : scala.collection.mutable.Set[Post] = postsService.getPosts(author, from, to)
+    val posts: Seq[Post] = postsService.getPosts(author, from, to).toSeq.sorted
     Map("posts" -> posts, "count" -> posts.size)
   }
 
   get("/posts/:id") {request : Request =>
     val id : String = request.params.getOrElse("id","Fail")
     val post : Option[Post] =  postsService.getPostById(id)
-    if (post nonEmpty) Map("posts" -> postsService.getPostById(id)) else Map("Error" -> response.status(401).plain("ID not recognized"))
+    if (post nonEmpty) Map("posts" -> postsService.getPostById(id).toSeq.sorted) else Map("Error" -> response.status(401).plain("ID not recognized"))
 
   }
 
