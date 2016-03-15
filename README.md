@@ -22,7 +22,7 @@ Pour lancer l'app :
   - Clonez le repo
   - Lancez "sbt run" à la racine (nécessite une installation de Sbt et un SDK Scala) 
   
-Je pense n'avoir rien oublié, j'ai rjaouté une Regex pour vérifier les dates saisies et il est possible de re-scraper VDM 
+Je pense n'avoir rien oublié, j'ai rajouté une Regex pour vérifier les dates saisies et il est possible de re-scraper VDM 
 en saisisannt "/scraping". 
 
 Dans l'éventualité où il y aurait un problème, je suis disponilbe par mail ! 
